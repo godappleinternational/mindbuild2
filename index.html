@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Mind Building Youth Care Foundation</title>
+  <style>
+    /* Root colors */
+    :root {
+      --indigo: #4B0082;
+      --light-brown: #A0522D;
+      --white: #fff;
+      --black: #000;
+      --gray-light: #f9f7f3;
+      --gray-dark: #232336;
+      --transition-speed: 0.3s;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      cursor: url('data:image/svg+xml;utf8,<svg fill="%234B0082" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L22 12 L2 22 Z"/></svg>') 4 0, auto;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      transition: background var(--transition-speed), color var(--transition-speed);
+      scroll-behavior: smooth;
+    }
+    body.dark {
+      background: var(--gray-dark);
+      color: var(--gray-light);
+      cursor: url('data:image/svg+xml;utf8,<svg fill="%23A0522D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L22 12 L2 22 Z"/></svg>') 4 0, auto;
+    }
+
+    a {
+      color: var(--indigo);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+    body.dark a {
+      color: var(--light-brown);
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 8px rgba(75, 0, 130, 0.1);
+      z-index: 1000;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+    body.dark header {
+      background: var(--gray-dark);
+      box-shadow: 0 2px 8px rgba(160, 82, 45, 0.3);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--indigo);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo .icon {
+      color: var(--light-brown);
+      font-size: 1.8rem;
+    }
+    body.dark .logo {
+      color: var(--light-brown);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    nav a {
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      color: var(--indigo);
+      transition: background-color 0.2s, color 0.2s;
+    }
+    nav a.active,
+    nav a:hover {
+      background-color: var(--light-brown);
+      color: var(--white);
+    }
+    body.dark nav a {
+      color: var(--light-brown);
+    }
+    body.dark nav a.active,
+    body.dark nav a:hover {
+      background-color: var(--indigo);
+      color: var(--white);
+    }
+
+    /* Dark mode toggle button */
+    .toggle-btn {
+      background: none;
+      border: 2px solid var(--indigo);
+      color: var(--indigo);
+      border-radius: 6px;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: var(--indigo);
+      color: var(--white);
+    }
+    body.dark .toggle-btn {
+      border-color: var(--light-brown);
+      color: var(--light-brown);
+    }
+    body.dark .toggle-btn:hover {
+      background-color: var(--light-brown);
+      color: var(--white);
+    }
+
+    /* Main container */
+    main {
+      max-width: 1100px;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    /* Hero Section */
+    #home {
+      background: linear-gradient(135deg, var(--light-brown) 0%, var(--indigo) 100%);
+      color: var(--white);
+      border-radius: 15px;
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(160, 82, 45, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    #home::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle at center, rgba(255 255 255 / 0.15), transparent 70%);
+      animation: pulse 8s infinite alternate ease-in-out;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7;}
+      100% { transform: scale(1.3); opacity: 0.3;}
+    }
+    #home > * {
+      position: relative;
+      z-index: 1;
+    }
+    #home h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    #home p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+    #home .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background-color: var(--white);
+      color: var(--indigo);
+      font-weight: 700;
+      padding: 0.9rem 2.5rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(75, 0, 130, 0.3);
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:hover {
+      background-color: var(--light-brown);
+      color: var(--white);
+      box-shadow: 0 6px 18px rgba(160, 82, 45, 0.6);
+    }
+    body.dark #home {
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--light-brown) 100%);
+      box-shadow: 0 8px 20px rgba(75, 0, 130, 0.6);
+    }
+    body.dark #home .btn {
+      background-color: var(--gray-dark);
+      color: var(--light-brown);
+      box-shadow: 0 4px 12px rgba(160, 82, 45, 0.6);
+    }
+    body.dark #home .btn:hover {
+      background-color: var(--white);
+      color: var(--indigo);
+      box-shadow: 0 6px 18px rgba(75, 0, 130, 0.8);
+    }
+
+    /* Section Titles */
+    h2.section-title {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      color: var(--indigo);
+      border-bottom: 3px solid var(--light-brown);
+      padding-bottom: 0.3rem;
+      max-width: max-content;
+      transition: color var(--transition-speed), border-color var(--transition-speed);
+    }
+    body.dark h2.section-title {
+      color: var(--light-brown);
+      border-color: var(--indigo);
+    }
+
+    /* About Section */
+    #about p,
+    #about ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+    }
+    #about ul {
+      list-style: disc inside;
+      padding-left: 0;
+    }
+    #about ul li {
+      margin-bottom: 0.7rem;
+    }
+    .profile {
+      display: flex;
+      max-width: 900px;
+      margin: 2rem auto 0;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 4px 14px rgba(75, 0, 130, 0.1);
+      transition: background var(--transition-speed);
+    }
+    body.dark .profile {
+      background: var(--gray-dark);
+      box-shadow: 0 4px 14px rgba(160, 82, 45, 0.3);
+    }
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--indigo);
+      box-shadow: 0 0 12px var(--indigo);
+      flex-shrink: 0;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    body.dark .profile-img {
+      border-color: var(--light-brown);
+      box-shadow: 0 0 12px var(--light-brown);
+    }
+    .profile-details h3 {
+      margin-top: 0;
+      margin-bottom: 0.3rem;
+      font-size: 1.6rem;
+      color: var(--light-brown);
+      transition: color var(--transition-speed);
+    }
+    body.dark .profile-details h3 {
+      color: var(--indigo);
+    }
+    .profile-details p {
+      margin: 0.3rem 0;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    /* Programs Section */
+    #programs .program-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .program-card {
+      background: var(--gray-light);
+      padding: 1.8rem 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(75, 0, 130, 0.1);
+      transition: background var(--transition-speed), box-shadow var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    body.dark .program-card {
+      background: var(--gray-dark);
+      box-shadow: 0 6px 20px rgba(160, 82, 45, 0.3);
+    }
+    .program-card h3 {
+      margin-top: 0;
+      color: var(--light-brown);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      transition: color var(--transition-speed);
+    }
+    body.dark .program-card h3 {
+      color: var(--indigo);
+    }
+    .program-card p {
+      flex-grow: 1;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+      transition: color var(--transition-speed);
+    }
+    body.dark .program-card p {
+      color: #ddd;
+    }
+
+    /* Contact Section */
+    #contact {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    #contact .contact-info p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+    #contact .contact-info a {
+      font-weight: 600;
+    }
+    .contact-form {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-form label {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      resize: vertical;
+      background: var(--white);
+      color: var(--black);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--indigo);
+      outline: none;
+    }
+    body.dark .contact-form input,
+    body.dark .contact-form textarea {
+      background: var(--gray-dark);
+      color: var(--gray-light);
+      border-color: #555;
+    }
+    body.dark .contact-form input:focus,
+    body.dark .contact-form textarea:focus {
+      border-color: var(--light-brown);
+    }
+    .contact-form button {
+      background-color: var(--indigo);
+      color: var(--white);
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
+      align-self: flex-start;
+      box-shadow: 0 4px 14px rgba(75, 0, 130, 0.4);
+    }
+    .contact-form button:hover {
+      background-color: var(--light-brown);
+      box-shadow: 0 6px 20px rgba(160, 82, 45, 0.6);
+    }
+
+    /* Donate Section */
+    #donate {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #donate h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      color: var(--indigo);
+      transition: color var(--transition-speed);
+    }
+    body.dark #donate h2 {
+      color: var(--light-brown);
+    }
+    #donate p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .donate-methods {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .donate-card {
+      background: var(--gray-light);
+      padding: 1.8rem 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(75, 0, 130, 0.1);
+      width: 320px;
+      transition: background var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    body.dark .donate-card {
+      background: var(--gray-dark);
+      box-shadow: 0 6px 20px rgba(160, 82, 45, 0.3);
+    }
+    .donate-card h3 {
+      margin-top: 0;
+      color: var(--light-brown);
+      margin-bottom: 1rem;
+      transition: color var(--transition-speed);
+    }
+    body.dark .donate-card h3 {
+      color: var(--indigo);
+    }
+    .donate-card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+      transition: color var(--transition-speed);
+    }
+    body.dark .donate-card p {
+      color: #ddd;
+    }
+    #donate .btn-contact {
+      background-color: var(--indigo);
+      color: var(--white);
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 14px rgba(75, 0, 130, 0.4);
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    #donate .btn-contact:hover {
+      background-color: var(--light-brown);
+      box-shadow: 0 6px 20px rgba(160, 82, 45, 0.6);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--white);
+      color: #666;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.9rem;
+      user-select: none;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+    body.dark footer {
+      background: var(--gray-dark);
+      color: #aaa;
+      border-top: 1px solid #444;
+    }
+
+    /* Social Floating Buttons */
+    .social-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1100;
+    }
+    .social-float a {
+      width: 56px;
+      height: 56px;
+      background-color: var(--indigo);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(75, 0, 130, 0.5);
+      transition: background-color 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .social-float a:hover {
+      background-color: var(--light-brown);
+      box-shadow: 0 6px 20px rgba(160, 82, 45, 0.7);
+    }
+    body.dark .social-float a {
+      background-color: var(--light-brown);
+      box-shadow: 0 4px 12px rgba(160, 82, 45, 0.5);
+    }
+    body.dark .social-float a:hover {
+      background-color: var(--indigo);
+      box-shadow: 0 6px 20px rgba(75, 0, 130, 0.7);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #home h1 {
+        font-size: 2rem;
+      }
+      #home p {
+        font-size: 1.1rem;
+      }
+      .profile {
+        flex-direction: column;
+        text-align: center;
+      }
+      .profile-details h3 {
+        font-size: 1.4rem;
+      }
+      .program-card {
+        padding: 1.2rem 1rem;
+      }
+      .donate-methods {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      nav {
+        gap: 1rem;
+      }
+    }
+  </style>
+  <!-- Icons CDN -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <div class="logo" aria-label="The Mind Building Youth Care Foundation logo">
+      <span class="icon" aria-hidden="true">🧠</span>
+      The Mind Building <span style="color: var(--light-brown); margin-left: 0.3rem;">Youth Care Foundation</span>
+    </div>
+    <nav role="navigation" aria-label="Primary navigation">
+      <a href="#home" class="active" aria-current="page">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#programs">Our Programs</a>
+      <a href="#contact">Contact</a>
+      <a href="#donate">Donate</a>
+      <button class="toggle-btn" id="toggleMode" aria-label="Toggle dark mode">🌞</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <section id="home" tabindex="0" aria-label="Welcome section">
+      <h1>Welcome to The Mind Building Youth Care Foundation</h1>
+      <p>
+        Empowering the youth of Suleja, Abuja, Nigeria to build brighter futures through education, mentorship, and care.
+      </p>
+      <div class="btn-group">
+        <a href="#donate" class="btn" aria-label="Donate now button">Donate Now <i class="fa-solid fa-hand-holding-heart"></i></a>
+        <a href="#programs" class="btn" aria-label="View our programs button">Our Programs <i class="fa-solid fa-people-group"></i></a>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" tabindex="0" aria-label="About us section">
+      <h2 class="section-title">About Us</h2>
+      <p>
+        <strong>The Mind Building Youth Care Foundation</strong> is a non-profit organization located in Suleja, Abuja, Nigeria. Our mission is to nurture and empower young minds by providing support, education, and opportunities for youth to realize their full potential.
+      </p>
+      <ul>
+        <li>Founded by <strong>Mrs. Sarah Eseyi Oriowo</strong>, a passionate advocate for youth development.</li>
+        <li>Supported by her husband, <strong>Mr. Seun Oriowo</strong>.</li>
+        <li>Driven by the belief that every young person deserves a chance to succeed.</li>
+        <li>Committed to fostering a future where every youth is equipped with knowledge, skills, and confidence.</li>
+      </ul>
+      <div class="profile" aria-label="Founder profile">
+        <img
+          src="https://randomuser.me/api/portraits/women/65.jpg"
+          alt="Portrait of Mrs. Sarah Eseyi Oriowo"
+          class="profile-img"
+          loading="lazy"
+        />
+        <div class="profile-details">
+          <h3>Mrs. Sarah Eseyi Oriowo</h3>
+          <p><strong>Chief Executive Officer (CEO) & Founder</strong><br />Married to Mr. Seun Oriowo</p>
+          <p>
+            Mrs. Sarah is dedicated to youth empowerment and community development. Her vision is to create a support system where young people can thrive, learn, and lead.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Programs -->
+    <section id="programs" tabindex="0" aria-label="Our programs section">
+      <h2 class="section-title">Our Programs</h2>
+      <div class="program-cards">
+        <article class="program-card" tabindex="0" aria-label="Mentorship Initiatives program">
+          <h3>Mentorship Initiatives</h3>
+          <p>
+            Pairing youth with experienced mentors to guide their personal and professional growth. Our mentorship programs focus on leadership, career guidance, and life skills.
+          </p>
+        </article>
+        <article class="program-card" tabindex="0" aria-label="Educational Support program">
+          <h3>Educational Support</h3>
+          <p>
+            Providing scholarships, school supplies, and tutoring for underprivileged students. We believe education is the key to unlocking potential and breaking the cycle of poverty.
+          </p>
+        </article>
+        <article class="program-card" tabindex="0" aria-label="Community Outreach program">
+          <h3>Community Outreach</h3>
+          <p>
+            Organizing workshops, seminars, and events that promote mental health, leadership, and essential life skills. We engage with the community to create positive change.
+          </p>
+        </article>
+        <article class="program-card" tabindex="0" aria-label="Youth Empowerment Seminars program">
+          <h3>Youth Empowerment Seminars</h3>
+          <p>
+            Regular seminars and bootcamps on entrepreneurship, digital literacy, and self-confidence, tailored to inspire and equip our youth for the future.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" tabindex="0" aria-label="Contact section">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-info">
+        <p><strong>Location:</strong> Suleja, Abuja, Nigeria</p>
+        <p><strong>Phone:</strong> <a href="tel:+2348168795769" aria-label="Call +2348168795769">+2348168795769</a></p>
+        <p><strong>Email:</strong> <a href="mailto:themindbuildingfoundation@gmail.com" aria-label="Email themindbuildingfoundation@gmail.com">themindbuildingfoundation@gmail.com</a></p>
+      </div>
+      <form class="contact-form" aria-label="Contact form" onsubmit="event.preventDefault(); alert('Thank you for contacting us!'); this.reset();">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required aria-required="true" />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required aria-required="true" />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+        <button type="submit" class="btn" aria-label="Send message">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </section>
+
+    <!-- Donate -->
+    <section id="donate" tabindex="0" aria-label="Donate section">
+      <h2>Support Our Mission</h2>
+      <p>
+        Your donation helps us continue to empower and support the youth of Suleja and beyond. Every contribution makes a difference!
+      </p>
+      <div class="donate-methods" role="list">
+        <article class="donate-card" role="listitem" tabindex="0" aria-label="Bank transfer donation details">
+          <h3>Bank Transfer</h3>
+          <p>
+            <strong>Account Name:</strong> The Mind Building Youth Care Foundation<br />
+            <strong>Bank:</strong> Example Bank Plc<br />
+            <strong>Account Number:</strong> 1234567890
+          </p>
+        </article>
+        <article class="donate-card" role="listitem" tabindex="0" aria-label="Contact donation details">
+          <h3>Contact Us for Other Ways to Give</h3>
+          <p>
+            Email: <a href="mailto:themindbuildingfoundation@gmail.com">themindbuildingfoundation@gmail.com</a><br />
+            Phone: <a href="tel:+2348168795769">+2348168795769</a>
+          </p>
+        </article>
+      </div>
+      <a href="#contact" class="btn btn-contact" aria-label="Contact for partnership">Contact for Partnership</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 The Mind Building Youth Care Foundation. All rights reserved.<br />
+    Suleja, Abuja, Nigeria | +2348168795769 | themindbuildingfoundation@gmail.com
+  </footer>
+
+  <!-- Social Floating Buttons -->
+  <div class="social-float" aria-label="Social media links">
+    <a href="https://wa.me/+2348168795769" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="https://www.instagram.com/themindbuildingfoundation/" target="_blank" rel="noopener" aria-label="Visit Instagram page">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/TheMindBuildingForum" target="_blank" rel="noopener" aria-label="Visit Facebook page">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+  </div>
+
+  <script>
+    // Navigation active link highlight
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        e.target.classList.add('active');
+      });
+    });
+
+    // Dark/Light mode toggle
+    const toggleBtn = document.getElementById('toggleMode');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setMode(dark) {
+      if (dark) {
+        document.body.classList.add('dark');
+        toggleBtn.textContent = '🌙';
+      } else {
+        document.body.classList.remove('dark');
+        toggleBtn.textContent = '🌞';
+      }
+    }
+
+    // Load saved mode or system preference
+    let darkMode = localStorage.getItem('darkMode');
+    if (darkMode === null) darkMode = prefersDark ? 'true' : 'false';
+    setMode(darkMode === 'true');
+
+    toggleBtn.addEventListener('click', () => {
+      darkMode = document.body.classList.contains('dark') ? 'false' : 'true';
+      localStorage.setItem('darkMode', darkMode);
+      setMode(darkMode === 'true');
+    });
+  </script>
+</body>
+</html>
