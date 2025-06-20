@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Mind Building Youth Care Foundation</title>
+  <link rel="icon" href="f.png" type="image/png">
   <style>
     /* Root colors */
     :root {
@@ -539,6 +540,39 @@
       background-color: var(--indigo);
       box-shadow: 0 6px 20px rgba(75, 0, 130, 0.7);
     }
+/* Add to your CSS */
+#hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  width: 30px;
+  height: 22px;
+}
+#hamburger span {
+  height: 4px;
+  background: var(--dark-brown);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background: var(--white);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+  #hamburger {
+    display: flex;
+  }
+  nav.active {
+    display: flex;
+  }
+}
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -575,10 +609,18 @@
 </head>
 <body>
   <header>
-    <div class="logo" aria-label="The Mind Building Youth Care Foundation logo">
-      <span class="icon" aria-hidden="true">🧠</span>
+    
+    <div class="logo" aria-label="The Mind Building Youth Care Foundation logo"> 
+      <img src="f.jpg" alt="Description of the image", alt="logo" width="20" height="20">
       The Mind Building <span style="color: var(--light-brown); margin-left: 0.3rem;">Youth Care Foundation</span>
     </div>
+    <!-- Add inside header, before nav -->
+<div id="hamburger" tabindex="0" aria-label="Toggle navigation menu" role="button" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
     <nav role="navigation" aria-label="Primary navigation">
       <a href="#home" class="active" aria-current="page">Home</a>
       <a href="#about">About Us</a>
@@ -750,6 +792,21 @@
         toggleBtn.textContent = '🌞';
       }
     }
+// Add to your existing script
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('nav');
+
+hamburger.addEventListener('click', () => {
+  const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+  hamburger.setAttribute('aria-expanded', !expanded);
+  nav.classList.toggle('active');
+});
+hamburger.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    hamburger.click();
+  }
+});
 
     // Load saved mode or system preference
     let darkMode = localStorage.getItem('darkMode');
